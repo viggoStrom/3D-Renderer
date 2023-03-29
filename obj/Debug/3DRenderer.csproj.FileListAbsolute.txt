@@ -1,0 +1,11 @@
+C:\Users\viggo.strom\Source\Repos\viggoStrom\3DRenderer\bin\Debug\3DRenderer.exe.config
+C:\Users\viggo.strom\Source\Repos\viggoStrom\3DRenderer\bin\Debug\3DRenderer.exe
+C:\Users\viggo.strom\Source\Repos\viggoStrom\3DRenderer\bin\Debug\3DRenderer.pdb
+C:\Users\viggo.strom\Source\Repos\viggoStrom\3DRenderer\obj\Debug\3DRenderer.csproj.AssemblyReference.cache
+C:\Users\viggo.strom\Source\Repos\viggoStrom\3DRenderer\obj\Debug\3DRenderer.csproj.SuggestedBindingRedirects.cache
+C:\Users\viggo.strom\Source\Repos\viggoStrom\3DRenderer\obj\Debug\_3DRenderer.Form1.resources
+C:\Users\viggo.strom\Source\Repos\viggoStrom\3DRenderer\obj\Debug\_3DRenderer.Properties.Resources.resources
+C:\Users\viggo.strom\Source\Repos\viggoStrom\3DRenderer\obj\Debug\3DRenderer.csproj.GenerateResource.cache
+C:\Users\viggo.strom\Source\Repos\viggoStrom\3DRenderer\obj\Debug\3DRenderer.csproj.CoreCompileInputs.cache
+C:\Users\viggo.strom\Source\Repos\viggoStrom\3DRenderer\obj\Debug\3DRenderer.exe
+C:\Users\viggo.strom\Source\Repos\viggoStrom\3DRenderer\obj\Debug\3DRenderer.pdb
