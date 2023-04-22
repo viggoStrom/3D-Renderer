@@ -1,0 +1,17 @@
+body {
+    background-color: #212121;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+canvas {
+    background-color: white;
+    width: 671px;
+    height: 525px;
+    margin: 10vh;
+}
+
+input{
+    width: 50vw;
+}
