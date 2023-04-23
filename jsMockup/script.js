@@ -4,15 +4,17 @@ const ctx = canvas.getContext("2d")
 canvas.width = 671
 canvas.height = 525
 
-let focalLength = 6
+let focalLength = 1.2
 const updateFocal = (event) => {
-    focalLength = 6 * event.srcElement.value / 1000
+    focalLength = event.srcElement.value
 }
 
 const F = 5
-const B = 7
+const B = 6
+const O = 1.75
+const offset = 100
 
-const meshes = {
+const baseMeshes = {
     // 8 vertices of a cube. [x, y, z]
     cube: [
         // 1   2
@@ -23,44 +25,44 @@ const meshes = {
         // 3   4
 
         {
-            x: .25,
-            y: .25,
+            x: -1,
+            y: -1 + O,
             z: F,
         },
         {
-            x: .75,
-            y: .25,
+            x: 1,
+            y: -1 + O,
             z: F,
         },
         {
-            x: .25,
-            y: .75,
+            x: -1,
+            y: 1 + O,
             z: F,
         },
         {
-            x: .75,
-            y: .75,
+            x: 1,
+            y: 1 + O,
             z: F,
         },
 
         {
-            x: .25,
-            y: .25,
+            x: -1,
+            y: -1 + O,
             z: B,
         },
         {
-            x: .75,
-            y: .25,
+            x: 1,
+            y: -1 + O,
             z: B,
         },
         {
-            x: .25,
-            y: .75,
+            x: -1,
+            y: 1 + O,
             z: B,
         },
         {
-            x: .75,
-            y: .75,
+            x: 1,
+            y: 1 + O,
             z: B,
         },
     ]
@@ -68,6 +70,41 @@ const meshes = {
 
 let renders = {
     cube: []
+}
+
+let meshes = {
+    cube: []
+}
+
+const rotate = (vertex, angle = [0, 0, 0]) => {
+    const matrixDot = (A, B) => {
+        var result = new Array(A.length).fill(0).map(row => new Array(B[0].length).fill(0));
+
+        return result.map((row, i) => {
+            return row.map((val, j) => {
+                return A[i].reduce((sum, elm, k) => sum + (elm * B[k][j]), 0)
+            })
+        })
+    }
+
+    transformationMatrix = [
+        [Math.sin(angle[0]), 0, 0],
+        [0, Math.sin(angle[1]), 0],
+        [0, 0, Math.sin(angle[2])],
+    ]
+    rotatedMesh = []
+
+    // mesh.forEach(vertex => {
+    let arr = [vertex.x, vertex.y, vertex.z]
+    let obj = {
+        x: matrixDot(arr, transformationMatrix)[0],
+        y: matrixDot(arr, transformationMatrix)[1],
+        z: matrixDot(arr, transformationMatrix)[2],
+    }
+    rotatedMesh.push(obj)
+    // })
+
+    return rotatedMesh
 }
 
 const project = (vertex) => {
@@ -81,8 +118,8 @@ const project = (vertex) => {
 
 const scale = (point) => {
     return {
-        x: point.x * canvas.width,
-        y: point.y * canvas.height,
+        x: point.x * canvas.width * .8 + canvas.width / 2,
+        y: point.y * canvas.height + canvas.height / 2 - offset,
     }
 }
 
@@ -95,7 +132,7 @@ const lineBetween = (point1, point2) => {
     ctx.closePath()
 }
 
-meshes.cube.forEach(vertex => {
+baseMeshes.cube.forEach(vertex => {
     point = scale(project(vertex))
     const x = point.x
     const y = point.y
@@ -104,7 +141,15 @@ meshes.cube.forEach(vertex => {
         x: x,
         y: y,
     })
+    const rotatedVertex = rotate(vertex, [0, 0, 0])
+    meshes.cube.push({
+        x: rotatedVertex.x,
+        y: rotatedVertex.y,
+        z: rotatedVertex.z,
+    })
 })
+
+ctx.strokeStyle = "#303030"
 
 const frame = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -114,10 +159,12 @@ const frame = () => {
         const x = point.x
         const y = point.y
 
-        ctx.beginPath()
-        ctx.arc(x, y, 10, 0, Math.PI * 2)
-        ctx.stroke()
-        ctx.closePath()
+        if (document.querySelector("#circle").checked) {
+            ctx.beginPath()
+            ctx.arc(x, y, 10, 0, Math.PI * 2)
+            ctx.stroke()
+            ctx.closePath()
+        }
     })
 
     for (let index = 0; index < renders.cube.length; index++) {
