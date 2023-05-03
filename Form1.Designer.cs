@@ -1,4 +1,7 @@
-﻿namespace _3DRenderer
+﻿using System.Drawing;
+using System.Reflection;
+
+namespace _3DRenderer
 {
     partial class Form1
     {
@@ -28,6 +31,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
@@ -38,16 +42,17 @@
             this.NumericUpDownFocalLength = new System.Windows.Forms.NumericUpDown();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.LabelShowFaces = new System.Windows.Forms.Label();
+            this.CheckBoxShowFaces = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
+            this.LabelOffsetXYZ = new System.Windows.Forms.Label();
             this.NumericUpDownX = new System.Windows.Forms.NumericUpDown();
             this.NumericUpDownY = new System.Windows.Forms.NumericUpDown();
             this.NumericUpDownZ = new System.Windows.Forms.NumericUpDown();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.LabelOffsetXYZ = new System.Windows.Forms.Label();
-            this.CheckBoxShowFaces = new System.Windows.Forms.CheckBox();
+            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.TrackBarRotateModel = new System.Windows.Forms.TrackBar();
             this.ButtonResetRotateModel = new System.Windows.Forms.Button();
-            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.MeshRenderWindow = new System.Windows.Forms.PictureBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -58,8 +63,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownZ)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TrackBarRotateModel)).BeginInit();
             this.flowLayoutPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TrackBarRotateModel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MeshRenderWindow)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -69,6 +75,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel5, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.MeshRenderWindow, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -114,6 +121,7 @@
             // DropdownMesh
             // 
             this.DropdownMesh.BackColor = System.Drawing.SystemColors.Window;
+            this.DropdownMesh.DisplayMember = "Cube";
             this.DropdownMesh.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.DropdownMesh.FormattingEnabled = true;
             this.DropdownMesh.Items.AddRange(new object[] {
@@ -169,6 +177,16 @@
             this.LabelShowFaces.TabIndex = 0;
             this.LabelShowFaces.Text = "Show Faces";
             // 
+            // CheckBoxShowFaces
+            // 
+            this.CheckBoxShowFaces.AutoSize = true;
+            this.CheckBoxShowFaces.Location = new System.Drawing.Point(75, 7);
+            this.CheckBoxShowFaces.Margin = new System.Windows.Forms.Padding(3, 7, 3, 3);
+            this.CheckBoxShowFaces.Name = "CheckBoxShowFaces";
+            this.CheckBoxShowFaces.Size = new System.Drawing.Size(15, 14);
+            this.CheckBoxShowFaces.TabIndex = 1;
+            this.CheckBoxShowFaces.UseVisualStyleBackColor = true;
+            // 
             // flowLayoutPanel6
             // 
             this.flowLayoutPanel6.Controls.Add(this.LabelOffsetXYZ);
@@ -179,6 +197,16 @@
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
             this.flowLayoutPanel6.Size = new System.Drawing.Size(281, 27);
             this.flowLayoutPanel6.TabIndex = 8;
+            // 
+            // LabelOffsetXYZ
+            // 
+            this.LabelOffsetXYZ.AutoSize = true;
+            this.LabelOffsetXYZ.Location = new System.Drawing.Point(3, 0);
+            this.LabelOffsetXYZ.Name = "LabelOffsetXYZ";
+            this.LabelOffsetXYZ.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.LabelOffsetXYZ.Size = new System.Drawing.Size(71, 18);
+            this.LabelOffsetXYZ.TabIndex = 5;
+            this.LabelOffsetXYZ.Text = "Offset ( x,y,z )";
             // 
             // NumericUpDownX
             // 
@@ -201,28 +229,15 @@
             this.NumericUpDownZ.Size = new System.Drawing.Size(42, 20);
             this.NumericUpDownZ.TabIndex = 4;
             // 
-            // openFileDialog1
+            // flowLayoutPanel5
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // LabelOffsetXYZ
-            // 
-            this.LabelOffsetXYZ.AutoSize = true;
-            this.LabelOffsetXYZ.Location = new System.Drawing.Point(3, 0);
-            this.LabelOffsetXYZ.Name = "LabelOffsetXYZ";
-            this.LabelOffsetXYZ.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.LabelOffsetXYZ.Size = new System.Drawing.Size(71, 18);
-            this.LabelOffsetXYZ.TabIndex = 5;
-            this.LabelOffsetXYZ.Text = "Offset ( x,y,z )";
-            // 
-            // CheckBoxShowFaces
-            // 
-            this.CheckBoxShowFaces.AutoSize = true;
-            this.CheckBoxShowFaces.Location = new System.Drawing.Point(75, 3);
-            this.CheckBoxShowFaces.Name = "CheckBoxShowFaces";
-            this.CheckBoxShowFaces.Size = new System.Drawing.Size(15, 14);
-            this.CheckBoxShowFaces.TabIndex = 1;
-            this.CheckBoxShowFaces.UseVisualStyleBackColor = true;
+            this.flowLayoutPanel5.Controls.Add(this.TrackBarRotateModel);
+            this.flowLayoutPanel5.Controls.Add(this.ButtonResetRotateModel);
+            this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(293, 534);
+            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(671, 51);
+            this.flowLayoutPanel5.TabIndex = 4;
             // 
             // TrackBarRotateModel
             // 
@@ -231,8 +246,8 @@
             this.TrackBarRotateModel.LargeChange = 10;
             this.TrackBarRotateModel.Location = new System.Drawing.Point(3, 15);
             this.TrackBarRotateModel.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
-            this.TrackBarRotateModel.Maximum = 360;
-            this.TrackBarRotateModel.Minimum = -360;
+            this.TrackBarRotateModel.Maximum = 720;
+            this.TrackBarRotateModel.Minimum = -720;
             this.TrackBarRotateModel.Name = "TrackBarRotateModel";
             this.TrackBarRotateModel.Size = new System.Drawing.Size(599, 50);
             this.TrackBarRotateModel.TabIndex = 2;
@@ -249,21 +264,26 @@
             this.ButtonResetRotateModel.TabIndex = 3;
             this.ButtonResetRotateModel.Text = "Reset";
             this.ButtonResetRotateModel.UseVisualStyleBackColor = true;
+            this.ButtonResetRotateModel.Click += new System.EventHandler(this.ButtonResetRotateModel_Click);
             // 
-            // flowLayoutPanel5
+            // MeshRenderWindow
             // 
-            this.flowLayoutPanel5.Controls.Add(this.TrackBarRotateModel);
-            this.flowLayoutPanel5.Controls.Add(this.ButtonResetRotateModel);
-            this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(293, 534);
-            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(671, 51);
-            this.flowLayoutPanel5.TabIndex = 4;
+            this.MeshRenderWindow.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MeshRenderWindow.Location = new System.Drawing.Point(293, 3);
+            this.MeshRenderWindow.Name = "MeshRenderWindow";
+            this.MeshRenderWindow.Size = new System.Drawing.Size(671, 525);
+            this.MeshRenderWindow.TabIndex = 5;
+            this.MeshRenderWindow.TabStop = false;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(967, 588);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "3D Renderer";
@@ -281,17 +301,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownZ)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TrackBarRotateModel)).EndInit();
             this.flowLayoutPanel5.ResumeLayout(false);
             this.flowLayoutPanel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TrackBarRotateModel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MeshRenderWindow)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button TestButton;
-        private System.Windows.Forms.Label lblHello;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
@@ -312,6 +331,7 @@
         private System.Windows.Forms.TrackBar TrackBarRotateModel;
         private System.Windows.Forms.Button ButtonResetRotateModel;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
+        private System.Windows.Forms.PictureBox MeshRenderWindow;
     }
 }
 
