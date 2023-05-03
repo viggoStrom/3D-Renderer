@@ -76,7 +76,7 @@ let meshes = {
     cube: []
 }
 
-const rotate = (vertex, angle = [0, 0, 0]) => {
+const rotate = (mesh=[], angle = [0, 0, 0]) => {
     const matrixDot = (A, B) => {
         var result = new Array(A.length).fill(0).map(row => new Array(B[0].length).fill(0));
 
@@ -94,15 +94,15 @@ const rotate = (vertex, angle = [0, 0, 0]) => {
     ]
     rotatedMesh = []
 
-    // mesh.forEach(vertex => {
-    let arr = [vertex.x, vertex.y, vertex.z]
-    let obj = {
-        x: matrixDot(arr, transformationMatrix)[0],
-        y: matrixDot(arr, transformationMatrix)[1],
-        z: matrixDot(arr, transformationMatrix)[2],
-    }
-    rotatedMesh.push(obj)
-    // })
+    mesh.forEach(vertex => {
+        let arr = [vertex.x, vertex.y, vertex.z]
+        let obj = {
+            x: matrixDot(arr, transformationMatrix)[0],
+            y: matrixDot(arr, transformationMatrix)[1],
+            z: matrixDot(arr, transformationMatrix)[2],
+        }
+        rotatedMesh.push(obj)
+    })
 
     return rotatedMesh
 }
@@ -141,11 +141,10 @@ baseMeshes.cube.forEach(vertex => {
         x: x,
         y: y,
     })
-    const rotatedVertex = rotate(vertex, [0, 0, 0])
     meshes.cube.push({
-        x: rotatedVertex.x,
-        y: rotatedVertex.y,
-        z: rotatedVertex.z,
+        x: vertex.x,
+        y: vertex.y,
+        z: vertex.z,
     })
 })
 
@@ -166,7 +165,7 @@ const frame = () => {
             ctx.closePath()
         }
     })
-
+        
     for (let index = 0; index < renders.cube.length; index++) {
         renders.cube[index] = {
             x: scale(project(meshes.cube[index])).x,
