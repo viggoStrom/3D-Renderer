@@ -1,0 +1,19 @@
+body {
+    background-color: #212121;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+canvas {
+    background-color: white;
+    width: 671px;
+    height: 525px;
+    margin: 5vh;
+}
+
+#focal{
+    width: 50vw;
+    margin-left:0;
+    padding: 0;
+}
