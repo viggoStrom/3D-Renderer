@@ -40,32 +40,35 @@ namespace _3DRenderer
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.LabelFocalLength = new System.Windows.Forms.Label();
             this.NumericUpDownFocalLength = new System.Windows.Forms.NumericUpDown();
-            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.LabelShowFaces = new System.Windows.Forms.Label();
-            this.CheckBoxShowFaces = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             this.LabelOffsetXYZ = new System.Windows.Forms.Label();
             this.NumericUpDownX = new System.Windows.Forms.NumericUpDown();
             this.NumericUpDownY = new System.Windows.Forms.NumericUpDown();
             this.NumericUpDownZ = new System.Windows.Forms.NumericUpDown();
+            this.checkBoxShowCorners = new System.Windows.Forms.CheckBox();
+            this.MeshRenderWindow = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.autoRotate = new System.Windows.Forms.CheckBox();
             this.TrackBarRotateModel = new System.Windows.Forms.TrackBar();
             this.ButtonResetRotateModel = new System.Windows.Forms.Button();
-            this.MeshRenderWindow = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.anglePerSecondUpDown = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownFocalLength)).BeginInit();
-            this.flowLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MeshRenderWindow)).BeginInit();
             this.flowLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarRotateModel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.MeshRenderWindow)).BeginInit();
+            this.flowLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.anglePerSecondUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -74,8 +77,8 @@ namespace _3DRenderer
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel5, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.MeshRenderWindow, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel5, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -91,8 +94,9 @@ namespace _3DRenderer
             this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel3);
             this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel2);
-            this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel4);
             this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel6);
+            this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel4);
+            this.flowLayoutPanel1.Controls.Add(this.checkBoxShowCorners);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -153,39 +157,27 @@ namespace _3DRenderer
             // 
             // NumericUpDownFocalLength
             // 
+            this.NumericUpDownFocalLength.DecimalPlaces = 1;
+            this.NumericUpDownFocalLength.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.NumericUpDownFocalLength.Location = new System.Drawing.Point(78, 3);
+            this.NumericUpDownFocalLength.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.NumericUpDownFocalLength.Name = "NumericUpDownFocalLength";
             this.NumericUpDownFocalLength.Size = new System.Drawing.Size(120, 20);
             this.NumericUpDownFocalLength.TabIndex = 2;
-            // 
-            // flowLayoutPanel4
-            // 
-            this.flowLayoutPanel4.Controls.Add(this.LabelShowFaces);
-            this.flowLayoutPanel4.Controls.Add(this.CheckBoxShowFaces);
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 69);
-            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(281, 27);
-            this.flowLayoutPanel4.TabIndex = 6;
-            // 
-            // LabelShowFaces
-            // 
-            this.LabelShowFaces.AutoSize = true;
-            this.LabelShowFaces.Location = new System.Drawing.Point(3, 0);
-            this.LabelShowFaces.Name = "LabelShowFaces";
-            this.LabelShowFaces.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.LabelShowFaces.Size = new System.Drawing.Size(66, 18);
-            this.LabelShowFaces.TabIndex = 0;
-            this.LabelShowFaces.Text = "Show Faces";
-            // 
-            // CheckBoxShowFaces
-            // 
-            this.CheckBoxShowFaces.AutoSize = true;
-            this.CheckBoxShowFaces.Location = new System.Drawing.Point(75, 7);
-            this.CheckBoxShowFaces.Margin = new System.Windows.Forms.Padding(3, 7, 3, 3);
-            this.CheckBoxShowFaces.Name = "CheckBoxShowFaces";
-            this.CheckBoxShowFaces.Size = new System.Drawing.Size(15, 14);
-            this.CheckBoxShowFaces.TabIndex = 1;
-            this.CheckBoxShowFaces.UseVisualStyleBackColor = true;
+            this.NumericUpDownFocalLength.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumericUpDownFocalLength.ValueChanged += new System.EventHandler(this.NumericUpDownFocalLength_ValueChanged);
             // 
             // flowLayoutPanel6
             // 
@@ -193,7 +185,7 @@ namespace _3DRenderer
             this.flowLayoutPanel6.Controls.Add(this.NumericUpDownX);
             this.flowLayoutPanel6.Controls.Add(this.NumericUpDownY);
             this.flowLayoutPanel6.Controls.Add(this.NumericUpDownZ);
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(3, 102);
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(3, 69);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
             this.flowLayoutPanel6.Size = new System.Drawing.Size(281, 27);
             this.flowLayoutPanel6.TabIndex = 8;
@@ -210,46 +202,137 @@ namespace _3DRenderer
             // 
             // NumericUpDownX
             // 
+            this.NumericUpDownX.DecimalPlaces = 1;
+            this.NumericUpDownX.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.NumericUpDownX.Location = new System.Drawing.Point(80, 3);
+            this.NumericUpDownX.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.NumericUpDownX.Minimum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            -2147483648});
             this.NumericUpDownX.Name = "NumericUpDownX";
             this.NumericUpDownX.Size = new System.Drawing.Size(42, 20);
             this.NumericUpDownX.TabIndex = 2;
+            this.NumericUpDownX.ValueChanged += new System.EventHandler(this.NumericUpDownX_ValueChanged);
             // 
             // NumericUpDownY
             // 
+            this.NumericUpDownY.DecimalPlaces = 1;
+            this.NumericUpDownY.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.NumericUpDownY.Location = new System.Drawing.Point(128, 3);
+            this.NumericUpDownY.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.NumericUpDownY.Minimum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            -2147483648});
             this.NumericUpDownY.Name = "NumericUpDownY";
             this.NumericUpDownY.Size = new System.Drawing.Size(42, 20);
             this.NumericUpDownY.TabIndex = 3;
+            this.NumericUpDownY.ValueChanged += new System.EventHandler(this.NumericUpDownY_ValueChanged);
             // 
             // NumericUpDownZ
             // 
+            this.NumericUpDownZ.DecimalPlaces = 1;
+            this.NumericUpDownZ.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.NumericUpDownZ.Location = new System.Drawing.Point(176, 3);
+            this.NumericUpDownZ.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.NumericUpDownZ.Minimum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            -2147483648});
             this.NumericUpDownZ.Name = "NumericUpDownZ";
             this.NumericUpDownZ.Size = new System.Drawing.Size(42, 20);
             this.NumericUpDownZ.TabIndex = 4;
+            this.NumericUpDownZ.ValueChanged += new System.EventHandler(this.NumericUpDownZ_ValueChanged);
+            // 
+            // checkBoxShowCorners
+            // 
+            this.checkBoxShowCorners.AutoSize = true;
+            this.checkBoxShowCorners.Checked = true;
+            this.checkBoxShowCorners.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxShowCorners.Location = new System.Drawing.Point(3, 135);
+            this.checkBoxShowCorners.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.checkBoxShowCorners.Name = "checkBoxShowCorners";
+            this.checkBoxShowCorners.Padding = new System.Windows.Forms.Padding(4, 12, 0, 0);
+            this.checkBoxShowCorners.Size = new System.Drawing.Size(91, 29);
+            this.checkBoxShowCorners.TabIndex = 6;
+            this.checkBoxShowCorners.Text = "Show Circles";
+            this.checkBoxShowCorners.UseVisualStyleBackColor = true;
+            this.checkBoxShowCorners.CheckedChanged += new System.EventHandler(this.checkBoxShowCorners_CheckedChanged);
+            // 
+            // MeshRenderWindow
+            // 
+            this.MeshRenderWindow.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MeshRenderWindow.Location = new System.Drawing.Point(293, 3);
+            this.MeshRenderWindow.Name = "MeshRenderWindow";
+            this.MeshRenderWindow.Size = new System.Drawing.Size(671, 525);
+            this.MeshRenderWindow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.MeshRenderWindow.TabIndex = 5;
+            this.MeshRenderWindow.TabStop = false;
             // 
             // flowLayoutPanel5
             // 
+            this.flowLayoutPanel5.Controls.Add(this.autoRotate);
             this.flowLayoutPanel5.Controls.Add(this.TrackBarRotateModel);
             this.flowLayoutPanel5.Controls.Add(this.ButtonResetRotateModel);
-            this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel5.Location = new System.Drawing.Point(293, 534);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
             this.flowLayoutPanel5.Size = new System.Drawing.Size(671, 51);
             this.flowLayoutPanel5.TabIndex = 4;
+            // 
+            // autoRotate
+            // 
+            this.autoRotate.AutoSize = true;
+            this.autoRotate.Checked = true;
+            this.autoRotate.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.autoRotate.Location = new System.Drawing.Point(3, 3);
+            this.autoRotate.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.autoRotate.Name = "autoRotate";
+            this.autoRotate.Padding = new System.Windows.Forms.Padding(4, 12, 0, 0);
+            this.autoRotate.Size = new System.Drawing.Size(82, 29);
+            this.autoRotate.TabIndex = 9;
+            this.autoRotate.Text = "Auto rotate";
+            this.autoRotate.UseVisualStyleBackColor = true;
+            this.autoRotate.CheckedChanged += new System.EventHandler(this.autoRotate_CheckedChanged);
             // 
             // TrackBarRotateModel
             // 
             this.TrackBarRotateModel.BackColor = System.Drawing.SystemColors.Control;
             this.TrackBarRotateModel.Cursor = System.Windows.Forms.Cursors.SizeWE;
             this.TrackBarRotateModel.LargeChange = 10;
-            this.TrackBarRotateModel.Location = new System.Drawing.Point(3, 15);
-            this.TrackBarRotateModel.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
+            this.TrackBarRotateModel.Location = new System.Drawing.Point(85, 15);
+            this.TrackBarRotateModel.Margin = new System.Windows.Forms.Padding(0, 15, 0, 3);
             this.TrackBarRotateModel.Maximum = 720;
             this.TrackBarRotateModel.Minimum = -720;
             this.TrackBarRotateModel.Name = "TrackBarRotateModel";
-            this.TrackBarRotateModel.Size = new System.Drawing.Size(599, 50);
+            this.TrackBarRotateModel.Size = new System.Drawing.Size(499, 50);
             this.TrackBarRotateModel.TabIndex = 2;
             this.TrackBarRotateModel.TickFrequency = 0;
             this.TrackBarRotateModel.TickStyle = System.Windows.Forms.TickStyle.None;
@@ -257,7 +340,7 @@ namespace _3DRenderer
             // ButtonResetRotateModel
             // 
             this.ButtonResetRotateModel.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.ButtonResetRotateModel.Location = new System.Drawing.Point(608, 14);
+            this.ButtonResetRotateModel.Location = new System.Drawing.Point(587, 14);
             this.ButtonResetRotateModel.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
             this.ButtonResetRotateModel.Name = "ButtonResetRotateModel";
             this.ButtonResetRotateModel.Size = new System.Drawing.Size(60, 23);
@@ -266,18 +349,51 @@ namespace _3DRenderer
             this.ButtonResetRotateModel.UseVisualStyleBackColor = true;
             this.ButtonResetRotateModel.Click += new System.EventHandler(this.ButtonResetRotateModel_Click);
             // 
-            // MeshRenderWindow
-            // 
-            this.MeshRenderWindow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MeshRenderWindow.Location = new System.Drawing.Point(293, 3);
-            this.MeshRenderWindow.Name = "MeshRenderWindow";
-            this.MeshRenderWindow.Size = new System.Drawing.Size(671, 525);
-            this.MeshRenderWindow.TabIndex = 5;
-            this.MeshRenderWindow.TabStop = false;
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // flowLayoutPanel4
+            // 
+            this.flowLayoutPanel4.Controls.Add(this.label1);
+            this.flowLayoutPanel4.Controls.Add(this.anglePerSecondUpDown);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 102);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(281, 27);
+            this.flowLayoutPanel4.TabIndex = 9;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.label1.Size = new System.Drawing.Size(87, 18);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Degrees/second";
+            // 
+            // anglePerSecondUpDown
+            // 
+            this.anglePerSecondUpDown.Location = new System.Drawing.Point(96, 3);
+            this.anglePerSecondUpDown.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.anglePerSecondUpDown.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.anglePerSecondUpDown.Name = "anglePerSecondUpDown";
+            this.anglePerSecondUpDown.Size = new System.Drawing.Size(120, 20);
+            this.anglePerSecondUpDown.TabIndex = 2;
+            this.anglePerSecondUpDown.Value = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
+            this.anglePerSecondUpDown.ValueChanged += new System.EventHandler(this.anglePerSecondUpDown_ValueChanged);
             // 
             // Form1
             // 
@@ -289,22 +405,24 @@ namespace _3DRenderer
             this.Text = "3D Renderer";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownFocalLength)).EndInit();
-            this.flowLayoutPanel4.ResumeLayout(false);
-            this.flowLayoutPanel4.PerformLayout();
             this.flowLayoutPanel6.ResumeLayout(false);
             this.flowLayoutPanel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MeshRenderWindow)).EndInit();
             this.flowLayoutPanel5.ResumeLayout(false);
             this.flowLayoutPanel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarRotateModel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.MeshRenderWindow)).EndInit();
+            this.flowLayoutPanel4.ResumeLayout(false);
+            this.flowLayoutPanel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.anglePerSecondUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -320,18 +438,20 @@ namespace _3DRenderer
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Label LabelFocalLength;
         private System.Windows.Forms.NumericUpDown NumericUpDownFocalLength;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
-        private System.Windows.Forms.Label LabelShowFaces;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
         private System.Windows.Forms.NumericUpDown NumericUpDownX;
         private System.Windows.Forms.NumericUpDown NumericUpDownY;
         private System.Windows.Forms.NumericUpDown NumericUpDownZ;
         private System.Windows.Forms.Label LabelOffsetXYZ;
-        private System.Windows.Forms.CheckBox CheckBoxShowFaces;
         private System.Windows.Forms.TrackBar TrackBarRotateModel;
         private System.Windows.Forms.Button ButtonResetRotateModel;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
         private System.Windows.Forms.PictureBox MeshRenderWindow;
+        private System.Windows.Forms.CheckBox checkBoxShowCorners;
+        private System.Windows.Forms.CheckBox autoRotate;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown anglePerSecondUpDown;
     }
 }
 

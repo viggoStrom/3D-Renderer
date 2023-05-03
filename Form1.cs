@@ -12,12 +12,14 @@ namespace _3DRenderer
     {
         private double[,] cube;
         private float[,] render;
-        private double F = 5D;
-        private double B = 7D;
         private double focalLength = 1D;
-        private double verticalOffset = 0D;
         private double angle = 0;
-        private Bitmap canvas = new Bitmap(671, 525);
+        private double angleDelta = 0.0002;
+        private double xOffset, yOffset, zOffset;
+        private Boolean showCircles;
+        private Boolean doAutoRotate;
+        private int fps = 120;
+        private Bitmap canvas = new Bitmap(600, 600);
         private Pen blackPen = new Pen(Brushes.Black, 3);
         private Pen redPen = new Pen(Brushes.Red, 3);
         private Pen bluePen = new Pen(Brushes.Blue, 3);
@@ -27,22 +29,24 @@ namespace _3DRenderer
             InitializeComponent();
 
             cube = new double[8, 3] {
-                { -1D, -1D ,F },
-                { +1D, -1D ,F },
-                { -1D, +1D ,F },
-                { +1D, +1D ,F },
-                { -1D, -1D ,B },
-                { +1D, -1D ,B },
-                { -1D, +1D ,B },
-                { +1D, +1D ,B }
+                { -1D, -1D , +1D },
+                { +1D, -1D , +1D },
+                { -1D, +1D , +1D },
+                { +1D, +1D , +1D },
+                { -1D, -1D , -1D },
+                { +1D, -1D , -1D },
+                { -1D, +1D , -1D },
+                { +1D, +1D , -1D }
             };
 
             render = new float[8, 2];
 
             Timer tmr = new Timer();
-            tmr.Interval = 10;
+            tmr.Interval = (int)1000 / fps;
             tmr.Tick += Tmr_Tick;
             tmr.Start();
+
+            this.DropdownMesh.Text = "cube";
         }
 
         private void ButtonResetRotateModel_Click(object sender, EventArgs e)
@@ -50,175 +54,39 @@ namespace _3DRenderer
             TrackBarRotateModel.Value = 0;
         }
 
-        // Stolen from stack overflow: https://stackoverflow.com/questions/6311309/how-can-i-multiply-two-matrices-in-c
-        private double[,] MatrixMult(double[,] matrixA, double[,] matrixB)
-        {
-            int rowsA = matrixA.GetLength(0);
-            int columnsA = matrixA.GetLength(1);
-            int rowsB = matrixB.GetLength(0);
-            int columnsB = matrixB.GetLength(1);
-
-            if (columnsA != rowsB)
-            {
-                Console.WriteLine("Matrices can't be multiplied. Matrix A columns don't match matrix B's rows");
-                return new double[,] { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } };
-            }
-            else
-            {
-                double _;
-                double[,] result = new double[rowsA, columnsB];
-
-                for (int i = 0; i < rowsA; i++)
-                {
-                    for (int j = 0; j < columnsB; j++)
-                    {
-                        _ = 0;
-                        for (int k = 0; k < columnsA; k++)
-                        {
-                            _ += matrixA[i, k] * matrixB[k, j];
-                        }
-                        result[i, j] = _;
-                    }
-                }
-                return result;
-            }
-        }
-
         private double[] Rotate(double[] vertex, double degrees)
         {
-
-            double[,] transMatrix = new double[,]
-            {
-                //{ 0, -1, 0 },
-                //{ 1, 0, 0 },
-                //{ 0, 0, 1 }
-                { 0, -1, 0 },
-                { 1, 0, 0 },
-                { 0, 0, 1 }
-            };
-
-            double[,] t = transMatrix;
-            double x = vertex[0];
-            double y = vertex[1];
-            double z = vertex[2];
-
-            double[] finalVertex = new double[]
-            {
-                x * t[0, 0] + y * t[0, 1] + z * t[0, 2],
-                x * t[1, 0] + y * t[1, 1] + z * t[1, 2],
-                x * t[2, 0] + y * t[2, 1] + z * t[2, 2]
-            };
-
-            Matrix matrixVertex = new Matrix(
-                (float)finalVertex[0], 0, // 0 
-                (float)finalVertex[1], 0, // 0
-                (float)finalVertex[2], 0  // 1
-            );
-
-            matrixVertex.Rotate((float)degrees);
-
-            double[] transformedVertex = new double[]
-            {
-                matrixVertex.Elements[0],
-                matrixVertex.Elements[2],
-                matrixVertex.Elements[4]
-            };
-
-            //Matrix vector = new Matrix(
-            //    (float)vertex[0], 0, // 0 
-            //    (float)vertex[1], 0, // 0
-            //    (float)vertex[2], 0  // 1
-            //    );
-
-            //vector.Rotate((float)degrees);
-
-            //double[] transformedVertex = new double[]
-            // {
-            //    matrixVertex.Elements[0],
-            //    matrixVertex.Elements[2],
-            //    matrixVertex.Elements[4]
-            // };
-
-            //Matrix vector2 = new Matrix(
-            //        vector.Elements[2], 0,
-            //        vector.Elements[4], 0,
-            //        vector.Elements[0], 0
-            //        );
-
-            //vector2.Rotate(90f);
-
-            //double[] finalVertex = new double[]
-            //{
-            //    vector2.Elements[2],
-            //    vector2.Elements[4],
-            //    vector2.Elements[0],
-            //};
-
             double radians = degrees * 180 / Math.PI;
 
-            //double[,] transMatrix = new double[,]
-            //{
-            //    { 1, 0, 0 },
-            //    { 0, Math.Cos(radians), -Math.Sin(radians) },
-            //    { 0, Math.Sin(radians), Math.Cos(radians) }
-            //};
+            Matrix vector = new Matrix(
+                (float)vertex[0], 0,
+                (float)vertex[2], 0,
+                0, 0
+                );
 
-            //double[,] t = transMatrix;
-            //double x = vertex[0];
-            //double y = vertex[1];
-            //double z = vertex[2];
+            Matrix transMatrix = new Matrix(
+                (float)Math.Cos(radians), (float)-Math.Sin(radians),
+                (float)Math.Sin(radians), (float)Math.Cos(radians),
+                0, 0
+                );
 
-            //double[] vertex2 = new double[]
-            //{
-            //    x * t[0, 0] + y * t[0, 1] + z * t[0, 2],
-            //    x * t[1, 0] + y * t[1, 1] + z * t[1, 2],
-            //    x * t[2, 0] + y * t[2, 1] + z * t[2, 2]
-            //};
+            vector.Multiply(transMatrix);
 
-
-
-            return transformedVertex;
+            return new double[]
+            {
+                vector.Elements[0] - xOffset,
+                vertex[1] - yOffset,
+                vector.Elements[2] - zOffset - 5,
+            };
         }
-        //private double[] RotateV2(double[] vertex, double degrees)
-        //{
-        //    double radians = degrees * Math.PI / 180;
 
-        //    double[,] matrixVertex = new double[,] {
-        //        {(float)vertex[0], 0, 0},
-        //        {(float)vertex[1], 0, 0},
-        //        {(float)vertex[2], 0, 0}
-        //        };
-
-        //    //double[,] transMatrix = new double[,]
-        //    //{
-        //    //    { Math.Cos(radians), 0, Math.Sin(radians) },
-        //    //    { 0, 1, 0 },
-        //    //    { -Math.Sin(radians), 0, Math.Cos(radians) }
-        //    //};
-
-        //    double[,] transMatrix = new double[,]
-        //    {
-        //        { 1, 0, 0 },
-        //        { 0, Math.Cos(radians), -Math.Sin(radians) },
-        //        { 0, Math.Sin(radians), Math.Cos(radians) }
-        //    };
-
-        //    double[,] transformedVertex = MatrixMult(matrixVertex, transMatrix);
-
-        //    return new double[]
-        //    {
-        //        transformedVertex[0,0] + transformedVertex[0,2],
-        //        transformedVertex[1,0] + transformedVertex[1,2],
-        //        transformedVertex[2,0] + transformedVertex[2,2],
-        //    };
-        //}
 
         private double[] Scale(double[] point)
         {
             return new double[2]
             {
                 point[0] * canvas.Width + canvas.Width/2,
-                point[1] * canvas.Height + canvas.Height/2 + verticalOffset
+                point[1] * canvas.Height + canvas.Height/2
             };
         }
         private double[] Project(double[] vertex)
@@ -228,11 +96,45 @@ namespace _3DRenderer
                 (focalLength * vertex[1] / vertex[2])
             };
         }
+
+        private void checkBoxShowCorners_CheckedChanged(object sender, EventArgs e)
+        {
+            showCircles = !showCircles;
+        }
+        private void autoRotate_CheckedChanged(object sender, EventArgs e)
+        {
+            doAutoRotate = !doAutoRotate;
+        }
+
+        private void NumericUpDownX_ValueChanged(object sender, EventArgs e)
+        {
+            xOffset = (double)this.NumericUpDownX.Value;
+        }
+
+        private void NumericUpDownY_ValueChanged(object sender, EventArgs e)
+        {
+            yOffset = (double)this.NumericUpDownY.Value;
+        }
+
+        private void NumericUpDownZ_ValueChanged(object sender, EventArgs e)
+        {
+            zOffset = (double)this.NumericUpDownZ.Value;
+        }
+
+        private void NumericUpDownFocalLength_ValueChanged(object sender, EventArgs e)
+        {
+            focalLength = (double)this.NumericUpDownFocalLength.Value;
+        }
+
+        private void anglePerSecondUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            angleDelta = (double)this.anglePerSecondUpDown.Value / 1000 / fps;
+        }
+
         private void Draw(double angle)
         {
-            canvas = new Bitmap(671, 525);
+            canvas = new Bitmap(600, 600);
             Graphics g = Graphics.FromImage(canvas);
-            g.FillRectangle(Brushes.White, 0, 0, canvas.Width, canvas.Height);
 
             //vv Code that draws goes here vv
 
@@ -247,7 +149,10 @@ namespace _3DRenderer
                 double x = point[0];
                 double y = point[1];
 
-                g.DrawEllipse(blackPen, new Rectangle((int)x - 10, (int)y - 10, 20, 20));
+                if (!showCircles)
+                {
+                    g.DrawEllipse(blackPen, new Rectangle((int)x - 10, (int)y - 10, 20, 20));
+                }
             }
 
 
@@ -274,8 +179,15 @@ namespace _3DRenderer
         private void Tmr_Tick(object sender, EventArgs e)  //run this logic each timer tick
         {
             Draw(angle);
-            //angle += 0.2;
-            angle = 10;
+
+            if (!doAutoRotate)
+            {
+                angle += angleDelta;
+                if (angle >= 720)
+                {
+                    angle = -720;
+                }
+            }
         }
 
     }
