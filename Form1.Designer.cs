@@ -49,6 +49,7 @@ namespace _3DRenderer
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.AnglePerSecondUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
             this.checkBoxShowCorners = new System.Windows.Forms.CheckBox();
             this.MeshRenderWindow = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
@@ -56,7 +57,6 @@ namespace _3DRenderer
             this.TrackBarRotateModel = new System.Windows.Forms.TrackBar();
             this.ButtonResetRotateModel = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -175,7 +175,7 @@ namespace _3DRenderer
             1,
             0,
             0,
-            0});
+            131072});
             this.NumericUpDownFocalLength.Name = "NumericUpDownFocalLength";
             this.NumericUpDownFocalLength.Size = new System.Drawing.Size(120, 20);
             this.NumericUpDownFocalLength.TabIndex = 2;
@@ -329,6 +329,16 @@ namespace _3DRenderer
             0});
             this.AnglePerSecondUpDown.ValueChanged += new System.EventHandler(this.AnglePerSecondUpDown_ValueChanged);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(176, 0);
+            this.label2.Name = "label2";
+            this.label2.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
+            this.label2.Size = new System.Drawing.Size(23, 19);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "°⁄s";
+            // 
             // checkBoxShowCorners
             // 
             this.checkBoxShowCorners.AutoSize = true;
@@ -410,16 +420,6 @@ namespace _3DRenderer
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(176, 0);
-            this.label2.Name = "label2";
-            this.label2.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
-            this.label2.Size = new System.Drawing.Size(23, 19);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "°⁄s";
             // 
             // Form1
             // 

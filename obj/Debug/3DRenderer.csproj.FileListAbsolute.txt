@@ -9,3 +9,7 @@ C:\Users\viggo.strom\Source\Repos\viggoStrom\3DRenderer\obj\Debug\3DRenderer.csp
 C:\Users\viggo.strom\Source\Repos\viggoStrom\3DRenderer\obj\Debug\3DRenderer.csproj.CoreCompileInputs.cache
 C:\Users\viggo.strom\Source\Repos\viggoStrom\3DRenderer\obj\Debug\3DRenderer.exe
 C:\Users\viggo.strom\Source\Repos\viggoStrom\3DRenderer\obj\Debug\3DRenderer.pdb
+C:\Users\viggo.strom\Source\Repos\viggoStrom\3DRenderer\bin\Debug\3DRenderer.exe.manifest
+C:\Users\viggo.strom\Source\Repos\viggoStrom\3DRenderer\bin\Debug\3DRenderer.application
+C:\Users\viggo.strom\Source\Repos\viggoStrom\3DRenderer\obj\Debug\3DRenderer.exe.manifest
+C:\Users\viggo.strom\Source\Repos\viggoStrom\3DRenderer\obj\Debug\3DRenderer.application
