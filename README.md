@@ -20,3 +20,7 @@ This is my final project for the applied programming course at NTI Gymnasiet, Up
 1. Clone the repo.
 2. Open the solution file in Visual Studio.
 3. Build the solution.
+
+## Technologies 
+- C#
+- Windows Forms
